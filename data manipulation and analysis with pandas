@@ -1,0 +1,31 @@
+import pandas as pd
+
+# 1. Create DataFrame: Construct with data
+data = {
+    'Name': ['Aditi', 'Rahul', 'Deepak', 'Priya', 'Vijay'],
+    'Age': [25, 30, 35, 40, 45],
+    'City': ['Delhi', 'Mumbai', 'Bangalore', 'Hyderabad', 'Chennai']
+}
+df = pd.DataFrame(data)
+
+# 2. Add Column: Insert 'Age Group' categorizing by age ('20s', '30s', '40s') using pd.cut()
+bins = [20, 30, 40, 50]
+labels = ['20s', '30s', '40s']
+df['Age Group'] = pd.cut(df['Age'], bins=bins, labels=labels, right=False)
+
+# 3. Filter: Generate a DataFrame for individuals in their 30s
+df_30s = df[df['Age Group'] == '30s'].copy()
+
+# 4. Statistics: Calculate and display mean, median, and variance of ages for the 30s group
+mean_age_30s = df_30s['Age'].mean()
+median_age_30s = df_30s['Age'].median()
+variance_age_30s = df_30s['Age'].var()
+
+print("Original DataFrame:")
+print(df)
+print("\nDataFrame for individuals in their 30s:")
+print(df_30s)
+print("\nStatistics for the 30s Age Group:")
+print(f"Mean Age: {mean_age_30s:.2f}")
+print(f"Median Age: {median_age_30s:.2f}")
+print(f"Variance of Age: {variance_age_30s:.2f}")
